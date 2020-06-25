@@ -1,0 +1,14 @@
+version: "3"
+
+# service app, build section of configuration
+# ce da setue context za current dir
+services:
+    app:
+        build:
+            context: .
+        ports:
+            - "8000:8000"
+        volumes: 
+            - ./app:/app
+        command: >
+         sh -c "python manage.py runserver 0.0.0.0:8000"
