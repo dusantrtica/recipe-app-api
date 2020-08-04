@@ -57,3 +57,23 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Recipe(models.Model):
+    """Recipe object"""
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    time_minutes = models.IntegerField()
+    price = models.DecimalField(max_digits=5, decimal_places=2)
+    # boje je blank=True nego da ima null = true, jer onda moramo da proveravamo
+    # da li je None i da li je == ""
+    link = models.CharField(max_length=255, blank=True)
+
+    # Moze i Ingredient umesto 'Ingredient', ali onda moramo da
+    # definisemo Ingredient pre Recipe
+    ingredients = models.ManyToManyField('Ingredient')
+    tags = models.ManyToManyField('Tag')
+
+    def __str__(self):
+        return self.title
