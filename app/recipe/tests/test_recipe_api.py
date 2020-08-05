@@ -44,7 +44,7 @@ class PrivateRecipeApiTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = get_user_model().objects.create_user('test@test.com', 'test123')
-        self.client.force_authentication(self.user)
+        self.client.force_authenticate(self.user)
 
     def test_retrieve_recipes(self):
         """Test retrieveing a list of recipes"""
